@@ -124,25 +124,4 @@ public class ProductRepository extends BaseRepository {
             throw new DataAccessException("Error deleting product", e);
         }
     }
-
-    private Category getRelatedCategory(int categoryId) throws SQLException {
-        var statement = connection.prepareStatement(
-                """
-                    SELECT CategoryID, CategoryName, Description
-                    FROM Categories
-                    WHERE CategoryID = ?
-                    """
-        );
-
-        statement.setInt(1, categoryId);
-
-        var resultSet = statement.executeQuery();
-        resultSet.next();
-        return new Category(
-                resultSet.getInt("CategoryID"),
-                resultSet.getString("CategoryName"),
-                resultSet.getString("Description")
-        );
-    }
-
 }
