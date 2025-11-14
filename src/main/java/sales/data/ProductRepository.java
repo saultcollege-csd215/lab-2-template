@@ -56,7 +56,7 @@ public class ProductRepository extends BaseRepository {
         }
     }
 
-    public Product create(ProductValidator.ProductData.Validated p) throws DataAccessException{
+    public int create(ProductValidator.ProductData.Validated p) throws DataAccessException{
         try {
             var statement = connection.prepareStatement(
                     """
@@ -73,14 +73,7 @@ public class ProductRepository extends BaseRepository {
 
             statement.executeUpdate();
 
-            return new Product(
-                    getLastInsertId(),
-                    p.name(),
-                    getRelatedCategory(p.categoryId()),
-                    p.price(),
-                    p.unitsInStock(),
-                    p.discontinued()
-            );
+            return getLastInsertId();
 
         } catch (SQLException e ) {
             logger.log(Level.SEVERE, "Error creating product", e);
@@ -88,7 +81,7 @@ public class ProductRepository extends BaseRepository {
         }
     }
 
-    public Product update(int productId, ProductValidator.ProductData.Validated p) throws DataAccessException {
+    public void update(int productId, ProductValidator.ProductData.Validated p) throws DataAccessException {
         try {
             var statement = connection.prepareStatement(
                     """
@@ -106,15 +99,6 @@ public class ProductRepository extends BaseRepository {
             statement.setInt(6, productId);
 
             statement.executeUpdate();
-
-            return new Product(
-                    productId,
-                    p.name(),
-                    getRelatedCategory(p.categoryId()),
-                    p.price(),
-                    p.unitsInStock(),
-                    p.discontinued()
-            );
 
         } catch (SQLException e ) {
             logger.log(Level.SEVERE, "Error updating product", e);

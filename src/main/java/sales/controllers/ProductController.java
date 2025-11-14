@@ -97,6 +97,28 @@ public class ProductController extends BaseController {
         }
     }
 
+    public void showProduct(int productId, ProductData.Unvalidated unvalidatedProduct, ValidationMessages validationMessages) {
+        try {
+            mainWindow.setTitle("Product Details");
+            var viewModel = new ProductEditView.ViewModel(
+                    productId,
+                    unvalidatedProduct.name(),
+                    unvalidatedProduct.categoryId(),
+                    unvalidatedProduct.categoryName(),
+                    unvalidatedProduct.price(),
+                    unvalidatedProduct.unitsInStock(),
+                    unvalidatedProduct.discontinued(),
+                    categoryRepo.all(),
+                    validationMessages,
+                    this::updateProduct,
+                    this::deleteProduct
+            );
+            mainWindow.setMainScene(ProductEditView.createScene(viewModel));
+        } catch (DataAccessException e) {
+            mainWindow.showError(e);
+        }
+    }
+
     public void createProduct(ProductData.Unvalidated p) {
         try {
             var validationResult = ProductValidator.validate(p);
@@ -104,8 +126,8 @@ public class ProductController extends BaseController {
             switch (validationResult) {
                 case Pass result -> {
                     var validatedProduct = result.validatedProduct();
-                    repo.create(validatedProduct);
-                    showProducts();
+                    var id = repo.create(validatedProduct);
+                    showProduct(id, p, ValidationMessages.none());
                 }
                 case Fail result -> showNewProduct(p, result.messages());
             }
@@ -121,8 +143,8 @@ public class ProductController extends BaseController {
             switch (validationResult) {
                 case Pass result -> {
                     var validatedProduct = result.validatedProduct();
-                    var updatedProduct = repo.update(productId, validatedProduct);
-                    showProduct(updatedProduct);
+                    repo.update(productId, validatedProduct);
+                    showProduct(productId, p, ValidationMessages.none());
                 }
                 case Fail result -> {
                     var viewModel = new ProductEditView.ViewModel(
