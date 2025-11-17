@@ -1,0 +1,114 @@
+# Lab 2 - Feature Implementation
+
+## Overview
+
+In this lab, you will implement a new feature for the 'Sales' application we have explored in class.  You have already implemented the 'Category' feature together with your teacher.  Now you will implement the 'Supplier' feature.
+
+Just as each product in the system can be associated with a category, each product can also be associated with a supplier. You will implement the necessary code updates to add the ability to view, edit, and create suppliers. You will also update the Product code to show supplier info and allow products to be associated with a supplier.
+
+A focus of this lab is to practice working within an existing codebase following established patterns.
+
+## Setup
+
+1. Accept the assignment link and clone the repository to your local machine.
+2. Open the project in IntelliJ IDEA.
+3. Create a branch named `lab-2`
+4. Switch to the `lab-2` branch.
+5. Do the remainder of the lab work on the `lab-2` branch.
+
+### AI Use
+
+> **IMPORTANT**: ***Failure to include an accurate AI Use Statement as described below may result in a lab grade deduction of up to 100% depending on your instructor's evaluation of how well you understand the code you submit***
+
+You MAY use AI tools such as Copilot to help you complete this lab (there is a fair amount of code to write), but:
+
+- You MUST review any AI-generated code carefully to ensure you understand it and that it meets the lab requirements.
+
+#### AI Use Statement
+
+**Whether or not you use AI**, you MUST include an AI Use Statement in your `reflections.md` document that indicates clearly:
+
+- Which specific AI tools you used in the completion of this lab (or an explicit statement that you did not use any AI tools).
+- Links to **ALL** AI chats you had related to this assignment. **IMPORTANT:** do NOT simply copy the URL from your browser; you MUST click the Share button and create a public link.
+
+Examples:
+- I used CoPilot to generate code in the following files: <list of files>.  I also used ChatGPT to help me better understand the lab requirements.  Below are links to my ChatGPT chats.
+- I used Claude to help me understand the JDBC API.  Below are links to my conversation.
+- I did not use any AI tools to complete this lab.
+
+
+## Instructions
+
+Your job is to implement the 'Supplier' feature in the application.  The requirements are shown below. 
+
+> **IMPORTANT:** You must follow the patterns established in the existing code. You can use the already-implemented 'Categories' functionality as a guide.
+> Specifically: 
+> - Use the `core` package to create core data and functions such as validation functions
+> - Define JavaFX views in the `ui` package with each view defining a nested ViewModel record to hold the view state
+> - Define a repository class in the `data` package to handle all database interactions for Supplier data
+> - Place all supplier-related coordination logic in a controller class in the `controllers` package
+> - Use nested sealed interfaces to define Validated and Unvalidated versions of supplier data, and a validation `Result` type
+
+### Feature Requirements
+1. The Supplier data is stored in the Suppliers table in the database.
+2. Only the following attributes of a Supplier are relevant for this lab (even though the database contains more fields).  You must create a `core` record for Supplier with only these fields:
+   1. CompanyName
+   2. ContactName
+   3. ContactTitle
+   4. Phone
+3. A View >> Suppliers menu item must lead to a Suppliers view that shows all existing suppliers in a table
+   1. Each row in the table must show the Supplier Name, Contact Name, Contact Title, and Phone Number
+   2. Each row must be double-clickable to lead to an edit form for that supplier
+4. A New >> Supplier menu item must lead to a form to create a new supplier
+   1. A 'Save' button must save the new supplier and return to the Suppliers view
+5. When creating/editing a supplier, the following constraints must apply:
+   1. Company name, Contact name, and Phone number are required fields
+   2. Contact title is optional
+   3. Phone number may only contain spaces or the characters `0123456789-.()+`
+6. In the Supplier edit view:
+   1. An 'Update' button must save the changes
+   2. A 'Delete' button must delete the supplier and return to the Suppliers view
+   3. If a loaded Supplier has associated products, there should be NO Delete button
+7. Products must be updated to allow associating a supplier with a product
+   1. The Products view must show the associated supplier's company name
+   2. The Product edit/create form must include a dropdown to select a supplier
+   3. The Product edit view must automatically select the current supplier in the dropdown
+8. Product validation must be updated to ensure that each product has a supplier selected 
+
+### Recommended Approach
+
+You are welcome to implement the above requirements in any order you choose. However, below is a sequence of steps that is likely to work well.
+As you work, be sure to run and try your code frequently. (Work iteratively in small, testable steps.)
+
+Note also how the IDE and compiler are able to guide your implementation. As you make changes to function signatures or type definitions,
+the IDE and compiler highlight lines of code that will no longer work with those changes—a wonderful benefit of a statically-typed language.
+
+- Create the core Supplier record
+- Implement the 'all suppliers' functionality (minus double-click handling)
+- Start implementing the 'new supplier' functionality (minus validation) so you can save new suppliers
+- Start implementing the 'edit supplier' functionality (minus validation and updating/deleting) so you can view individual suppliers
+  - Finish implmenting 'double-click to view' in the all-suppliers view
+  - Implement the logic to show/hide the delete button based on whether the supplier has associated products
+- Implement supplier validation logic and integrate it into the new/edit flows
+- Finish implementing the ability to store supplier updates into the database
+- Implement the ability to delete suppliers from the database
+- Update the Product datatypes, views and logic to support associating suppliers with products  
+  - You will need to update the existing ProductRepository SQL queries to include the necessary supplier data (again, use the Category implementation as a guide)
+
+## Reflection
+
+For full marks, complete the questions in `reflections.md`.
+
+Also, don't forget to complete your AI Use Statement!
+
+## Submission
+
+1. Make sure you have completed all requirements.
+2. Commit all your changes to the `lab-2` branch.
+3. Push the `lab-2` branch to your remote repository.
+4. Create a pull request from the `lab-2` branch to the `main` branch.
+5. Navigate to the "Files Changed" tab of your pull request, and **copy the URL** to this page into the lab folder on the LMS.
+
+## Rubric
+
+See the rubric attached to this lab in the LMS
