@@ -11,10 +11,11 @@ A focus of this lab is to practice working within an existing codebase following
 ## Setup
 
 1. Accept the assignment link and clone the repository to your local machine.
-2. Open the project in IntelliJ IDEA.
-3. Create a branch named `lab-2`
-4. Switch to the `lab-2` branch.
-5. Do the remainder of the lab work on the `lab-2` branch.
+2. Copy the northwind.db file (linked in the LMS) into the root project folder
+3. Open the project in IntelliJ IDEA.
+4. Create a branch named `lab-2`
+5. Switch to the `lab-2` branch.
+6. Do the remainder of the lab work on the `lab-2` branch.
 
 ### AI Use
 
@@ -87,7 +88,7 @@ the IDE and compiler highlight lines of code that will no longer work with those
 - Implement the 'all suppliers' functionality (minus double-click handling)
 - Start implementing the 'new supplier' functionality (minus validation) so you can save new suppliers
 - Start implementing the 'edit supplier' functionality (minus validation and updating/deleting) so you can view individual suppliers
-  - Finish implmenting 'double-click to view' in the all-suppliers view
+  - Finish implementing 'double-click to view' in the all-suppliers view
   - Implement the logic to show/hide the delete button based on whether the supplier has associated products
 - Implement supplier validation logic and integrate it into the new/edit flows
 - Finish implementing the ability to store supplier updates into the database
