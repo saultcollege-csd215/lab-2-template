@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-import static sales.core.validation.ProductValidator.ProductData;
+import sales.core.validation.ProductData;
 import static sales.ui.helpers.JavaFXUtils.addValidatedFieldToGrid;
 
 public class ProductEditView {
@@ -25,7 +25,6 @@ public class ProductEditView {
             int productId,
             String productName,
             int categoryId,
-            String categoryName,
             double price,
             int unitsInStock,
             boolean discontinued,
@@ -75,7 +74,6 @@ public class ProductEditView {
             viewModel.onUpdate().accept(viewModel.productId(), new ProductData.Unvalidated(
                     nameTextField.getText(),
                     selectedCategory != null ? selectedCategory.id() : -1,
-                    selectedCategory != null ? selectedCategory.name() : "",
                     priceTextField.getValue(),
                     stockTextField.getIntValue(),
                     discontinuedChoice.isSelected()));

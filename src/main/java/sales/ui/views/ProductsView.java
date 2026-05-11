@@ -16,7 +16,7 @@ public class ProductsView {
 
     public record ViewModel(
             List<Product> products,
-            Consumer<Product> onCategorySelected
+            Consumer<Product> onProductSelected
     ) {}
 
     public static Node createScene(ViewModel viewModel) {
@@ -32,7 +32,7 @@ public class ProductsView {
 
         table.getColumns().addAll(List.of(idCol, nameCol, categoryCol, priceCol, stockCol, discontinuedCol));
 
-        setOnDoubleClick(table, viewModel.onCategorySelected());
+        setOnDoubleClick(table, viewModel.onProductSelected());
 
         var pane = new VBox(table);
         // Make the table fill the vbox vertically

@@ -6,16 +6,6 @@ import java.util.List;
 
 public class CategoryValidator {
 
-    public sealed interface CategoryData {
-        record Unvalidated(String name, String description) implements CategoryData {
-            public static Unvalidated of(Category c) {
-                return new Unvalidated(c.name(), c.description());
-            }
-        }
-        record Validated(String name, String description) implements CategoryData {}
-    }
-
-
     public sealed interface Result {
         record Pass(CategoryData.Validated validatedCategoryData) implements Result {}
         record Fail(ValidationMessages messages) implements Result {}

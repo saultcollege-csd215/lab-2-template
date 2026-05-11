@@ -10,7 +10,7 @@ import sales.core.validation.ValidationMessages;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-import static sales.core.validation.CategoryValidator.CategoryData;
+import sales.core.validation.CategoryData;
 import static sales.ui.helpers.JavaFXUtils.addValidatedFieldToGrid;
 
 public class CategoryEditView {

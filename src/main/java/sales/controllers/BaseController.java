@@ -2,8 +2,12 @@ package sales.controllers;
 
 import sales.ui.MainWindow;
 
+/**
+ * Base controller class that provides common functionality for all controllers.
+ */
 public class BaseController {
 
+    /** The main window of the application, used to set titles, change scenes, and show errors. */
     protected final MainWindow mainWindow;
 
     public BaseController(MainWindow mainWindow) {

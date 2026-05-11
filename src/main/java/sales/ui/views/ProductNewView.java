@@ -14,7 +14,7 @@ import sales.ui.helpers.JavaFXUtils;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static sales.core.validation.ProductValidator.ProductData;
+import sales.core.validation.ProductData;
 import static sales.ui.helpers.JavaFXUtils.addValidatedFieldToGrid;
 
 public class ProductNewView {
@@ -22,7 +22,6 @@ public class ProductNewView {
     public record ViewModel(
             String productName,
             int categoryId,
-            String categoryName,
             double price,
             int unitsInStock,
             boolean discontinued,
@@ -48,7 +47,7 @@ public class ProductNewView {
                 .orElse(null));
         addValidatedFieldToGrid("Category", categoryChoiceBox, grid, 1, viewModel.messages().get("categoryId"));
 
-        var priceTextField = new NumberField(viewModel.price, false, 2);
+        var priceTextField = new NumberField(viewModel.price(), false, 2);
         addValidatedFieldToGrid("Price", priceTextField, grid, 2,viewModel.messages().get("price"));
 
         var stockTextField = new NumberField(viewModel.unitsInStock(), false, 0);
@@ -68,9 +67,8 @@ public class ProductNewView {
             viewModel.onSave().accept(new ProductData.Unvalidated(
                     nameTextField.getText(),
                     selectedCategory != null ? selectedCategory.id() : -1,
-                    selectedCategory != null ? selectedCategory.name() : "",
-                    Double.parseDouble(priceTextField.getText()),
-                    Integer.parseInt(stockTextField.getText()),
+                    priceTextField.getValue(),
+                    stockTextField.getIntValue(),
                     discontinuedChoice.isSelected()));
 
         });

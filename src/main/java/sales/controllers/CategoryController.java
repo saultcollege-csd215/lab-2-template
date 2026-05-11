@@ -9,7 +9,7 @@ import sales.ui.views.CategoriesView;
 import sales.ui.views.CategoryEditView;
 import sales.ui.views.CategoryNewView;
 
-import static sales.core.validation.CategoryValidator.CategoryData;
+import sales.core.validation.CategoryData;
 import static sales.core.validation.CategoryValidator.Result.*;
 
 

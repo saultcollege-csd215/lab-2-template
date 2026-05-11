@@ -10,7 +10,7 @@ import sales.ui.views.ProductEditView;
 import sales.ui.views.ProductNewView;
 import sales.ui.views.ProductsView;
 
-import static sales.core.validation.ProductValidator.ProductData;
+import sales.core.validation.ProductData;
 import static sales.core.validation.ProductValidator.Result.*;
 
 public class ProductController extends BaseController {
@@ -38,7 +38,6 @@ public class ProductController extends BaseController {
             var viewModel = new ProductNewView.ViewModel(
                     "",
                     -1,
-                    "",
                     0.0,
                     0,
                     false,
@@ -56,7 +55,6 @@ public class ProductController extends BaseController {
             var viewModel = new ProductNewView.ViewModel(
                     unvalidatedProduct.name(),
                     unvalidatedProduct.categoryId(),
-                    unvalidatedProduct.categoryName(),
                     unvalidatedProduct.price(),
                     unvalidatedProduct.unitsInStock(),
                     unvalidatedProduct.discontinued(),
@@ -75,7 +73,6 @@ public class ProductController extends BaseController {
                     p.id(),
                     p.name(),
                     p.category().id(),
-                    p.category().name(),
                     p.price(),
                     p.unitsInStock(),
                     p.discontinued(),
@@ -95,7 +92,6 @@ public class ProductController extends BaseController {
                     productId,
                     unvalidatedProduct.name(),
                     unvalidatedProduct.categoryId(),
-                    unvalidatedProduct.categoryName(),
                     unvalidatedProduct.price(),
                     unvalidatedProduct.unitsInStock(),
                     unvalidatedProduct.discontinued(),
@@ -115,7 +111,7 @@ public class ProductController extends BaseController {
 
             switch (validationResult) {
                 case Pass result -> {
-                    var validatedProduct = result.validatedProduct();
+                    var validatedProduct = result.validatedProductData();
                     var id = repo.create(validatedProduct);
                     showProduct(id, p, ValidationMessages.none());
                 }
@@ -130,7 +126,7 @@ public class ProductController extends BaseController {
 
             switch (validationResult) {
                 case Pass result -> {
-                    var validatedProduct = result.validatedProduct();
+                    var validatedProduct = result.validatedProductData();
                     repo.update(productId, validatedProduct);
                     showProduct(productId, p, ValidationMessages.none());
                 }

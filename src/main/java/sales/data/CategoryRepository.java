@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static sales.core.validation.CategoryValidator.CategoryData;
+import sales.core.validation.CategoryData;
 
 public class CategoryRepository extends BaseRepository {
 
