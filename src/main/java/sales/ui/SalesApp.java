@@ -21,7 +21,7 @@ public class SalesApp extends Application implements MainWindow {
     public void start(Stage primaryStage) {
 
         try {
-            this.dataService = new DataService();
+            this.dataService = new DataService("jdbc:sqlite:northwind.db");
             var appController = new AppController(this, dataService);
             this.mainLayout = appController.setMainLayout();
 

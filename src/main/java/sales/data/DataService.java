@@ -15,9 +15,9 @@ public class DataService {
     private final CategoryRepository categoryRepository;
 
 
-    public DataService() throws DataAccessException {
+    public DataService(String connectionString) throws DataAccessException {
         try {
-            this.connection = DriverManager.getConnection("jdbc:sqlite:northwind.db");
+            this.connection = DriverManager.getConnection(connectionString);
             this.productRepository = new ProductRepository(connection);
             this.categoryRepository = new CategoryRepository(connection);
         } catch (SQLException e) {
