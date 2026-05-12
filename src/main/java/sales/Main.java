@@ -1,6 +1,6 @@
 package sales;
 
-import sales.ui.SalesApp;
+import sales.feature.base.ui.SalesApp;
 
 public class Main {
 
