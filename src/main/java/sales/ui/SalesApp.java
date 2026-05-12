@@ -8,6 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import sales.controllers.AppController;
+import sales.controllers.CategoryController;
+import sales.controllers.ProductController;
 import sales.data.DataService;
 import sales.ui.views.ErrorView;
 
@@ -22,7 +24,12 @@ public class SalesApp extends Application implements MainWindow {
 
         try {
             this.dataService = new DataService("jdbc:sqlite:northwind.db");
-            var appController = new AppController(this, dataService);
+            var productRepo = dataService.getProductRepository();
+            var categoryRepo = dataService.getCategoryRepository();
+
+            var productController = new ProductController(this, productRepo, categoryRepo);
+            var categoryController = new CategoryController(this, categoryRepo);
+            var appController = new AppController(this, productController, categoryController);
             this.mainLayout = appController.setMainLayout();
 
             this.primaryStage = primaryStage;

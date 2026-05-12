@@ -16,13 +16,10 @@ public class AppController extends BaseController {
     /** The controller for category-related screens. */
     private final CategoryController categoryController;
 
-    public AppController(MainWindow mainWindow, DataService dataService) {
+    public AppController(MainWindow mainWindow, ProductController productController, CategoryController categoryController) {
         super(mainWindow);
-        var productRepo = dataService.getProductRepository();
-        var categoryRepo = dataService.getCategoryRepository();
-
-        this.productController = new ProductController(mainWindow, productRepo, categoryRepo);
-        this.categoryController = new CategoryController(mainWindow, categoryRepo);
+        this.productController = productController;
+        this.categoryController = categoryController;
     }
 
     /** Sets up the main BorderPane layout of the application and returns it. */
