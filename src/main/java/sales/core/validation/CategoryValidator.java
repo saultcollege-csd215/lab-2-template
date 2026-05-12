@@ -1,7 +1,5 @@
 package sales.core.validation;
 
-import sales.core.Category;
-
 import java.util.List;
 
 public class CategoryValidator {

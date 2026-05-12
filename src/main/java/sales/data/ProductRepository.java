@@ -3,7 +3,6 @@ package sales.data;
 import sales.core.Category;
 import sales.core.Product;
 import sales.core.validation.ProductData;
-import sales.core.validation.ProductValidator;
 
 import java.sql.Connection;
 import java.sql.SQLException;
