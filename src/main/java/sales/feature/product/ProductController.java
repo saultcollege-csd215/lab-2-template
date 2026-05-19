@@ -13,6 +13,9 @@ import sales.feature.product.ui.ProductsView;
 import sales.feature.product.validation.ProductData;
 import static sales.feature.product.validation.ProductValidator.Result.*;
 
+/**
+ * Manages the product-related views and interactions.
+ */
 public class ProductController extends BaseController {
 
     private final ProductRepository repo;
@@ -24,6 +27,9 @@ public class ProductController extends BaseController {
         this.categoryRepo = categoryRepo;
     }
 
+    /**
+     * Display a list of all products
+     */
     public void showProducts() {
         mainWindow.setTitle("Products");
         accessDataOrShowError(() -> {
@@ -32,6 +38,9 @@ public class ProductController extends BaseController {
         });
     }
 
+    /**
+     * Display the UI for creating a new product
+     */
     public void showNewProduct() {
         accessDataOrShowError(() -> {
             mainWindow.setTitle("New Product");
@@ -49,6 +58,11 @@ public class ProductController extends BaseController {
         });
     }
 
+    /**
+     * Display the UI for creating a new product, with validation messages for invalid product data
+     * @param unvalidatedProduct The invalid product data
+     * @param validationMessages The validation messages
+     */
     public void showNewProduct(ProductData.Unvalidated unvalidatedProduct, ValidationMessages validationMessages) {
         accessDataOrShowError(() -> {
             mainWindow.setTitle("New Product");
@@ -66,6 +80,10 @@ public class ProductController extends BaseController {
         });
     }
 
+    /**
+     * Show the 'edit' UI for the given Product
+     * @param p The Product to show
+     */
     public void showProduct(Product p) {
         accessDataOrShowError(() -> {
             mainWindow.setTitle("Product Details");
@@ -85,6 +103,12 @@ public class ProductController extends BaseController {
         });
     }
 
+    /**
+     * Show the 'edit' product view with validation messages for invalid product data
+     * @param productId The id of the product to show
+     * @param unvalidatedProduct The unvalidated product data
+     * @param validationMessages The validation messages to show in the UI
+     */
     public void showProduct(int productId, ProductData.Unvalidated unvalidatedProduct, ValidationMessages validationMessages) {
         accessDataOrShowError(() -> {
             mainWindow.setTitle("Product Details");
@@ -104,6 +128,11 @@ public class ProductController extends BaseController {
         });
     }
 
+    /**
+     * Attempt to create a new Product with the given unvalidated product data.
+     * If validation fails, show the 'edit product' UI with the validation messages.
+     * @param p The unvalidated product data.
+     */
     public void createProduct(ProductData.Unvalidated p) {
         accessDataOrShowError(() -> {
 
@@ -120,6 +149,12 @@ public class ProductController extends BaseController {
         });
     }
 
+    /**
+     * Attempt to update the given productId with the given product data.
+     * If validation fails, show the 'edit' view with validation messages.
+     * @param productId The ID of the product to update
+     * @param p The unvalidated product data
+     */
     public void updateProduct(int productId, ProductData.Unvalidated p) {
         accessDataOrShowError(() -> {
             var validationResult = ProductValidator.validate(p);
@@ -149,6 +184,10 @@ public class ProductController extends BaseController {
         });
     }
 
+    /**
+     * Delete a product
+     * @param productId The id of the product to delete
+     */
     public void deleteProduct(int productId) {
         accessDataOrShowError(() -> {
             repo.delete(productId);

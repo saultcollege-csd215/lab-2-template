@@ -8,8 +8,14 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+/**
+ * A text field that restricts the input to numeric values
+ */
 public class NumberField extends TextField {
 
+    /**
+     * The formatter that determines the format of the inputted text
+     */
     private final TextFormatter<Number> formatter;
 
     public NumberField(Number value, boolean allowNegative, int decimalPlaces) {
@@ -47,12 +53,13 @@ public class NumberField extends TextField {
         setValue(value);
     }
 
-    /** Get the current Integer value (null if empty) */
+    /** Get the current Double value (null if empty) */
     public Double getValue() {
         Number n = formatter.getValue();
         return n == null ? null : n.doubleValue();
     }
 
+    /** Get the current Integer value (null if empty) */
     public Integer getIntValue() {
         Number n = formatter.getValue();
         return n == null ? null : n.intValue();

@@ -17,8 +17,22 @@ import java.util.function.Consumer;
 import sales.feature.product.validation.ProductData;
 import static sales.feature.base.ui.helpers.JavaFXUtils.addValidatedFieldToGrid;
 
+/**
+ * A 'namespace' class related to UI for creating new products
+ */
 public class ProductNewView {
 
+    /**
+     * The view model for the ProductNew view
+     * @param productName
+     * @param categoryId
+     * @param price
+     * @param unitsInStock
+     * @param discontinued
+     * @param categoryChoices The set of Categories that the product could be associated with
+     * @param messages A set of validation messages to include in the UI
+     * @param onSave The callback for when the user clicks the 'Save' button
+     */
     public record ViewModel(
             String productName,
             int categoryId,
@@ -30,6 +44,10 @@ public class ProductNewView {
             Consumer<ProductData.Unvalidated> onSave
     ) {}
 
+    /**
+     * @param viewModel The view model containing all data used by this view
+     * @return The root Node of the scene for this view
+     */
     public static Node createScene(ViewModel viewModel) {
 
         var grid = new GridPane();

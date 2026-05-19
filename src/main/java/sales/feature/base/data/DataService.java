@@ -9,14 +9,27 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Provides access to data repositories that connect to the underlying database
+ */
 public class DataService {
 
     private static final Logger logger = Logger.getLogger(DataService.class.getName());
 
+    /**
+     * A JDBC Database connection object
+     */
     private final Connection connection;
-    private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
 
+    /**
+     * The Product repository
+     */
+    private final ProductRepository productRepository;
+
+    /**
+     * The Category repository
+     */
+    private final CategoryRepository categoryRepository;
 
     public DataService(String connectionString) throws DataAccessException {
         try {
@@ -29,6 +42,9 @@ public class DataService {
         }
     }
 
+    /**
+     * Closes the database connection
+     */
     public void stop() {
         try {
             connection.close();

@@ -7,6 +7,11 @@ import javafx.scene.layout.VBox;
 
 public class ErrorView {
 
+    /**
+     * Creates the scene for displaying error messages in the app
+     * @param e The Exception containing the error that occurred
+     * @return The root Node of the Scene
+     */
     public static Node createScene(Exception e) {
         var vbox = new VBox(10);
         vbox.setPadding(new Insets(10));
