@@ -13,8 +13,20 @@ import java.util.function.Consumer;
 import sales.feature.category.validation.CategoryData;
 import static sales.feature.base.ui.helpers.JavaFXUtils.addValidatedFieldToGrid;
 
+/**
+ * A 'namespace' for types and functions related to the 'edit category' view
+ */
 public class CategoryEditView {
 
+    /**
+     * The data required by the 'edit category' view
+     * @param categoryId
+     * @param categoryName
+     * @param categoryDescription
+     * @param messages Validation messages to show in the UI (if any)
+     * @param onUpdate The callback for when the user clicks the 'Update' button
+     * @param onDelete The callback for when the user clicks the 'Delete' button
+     */
     public record ViewModel (
                 int categoryId,
                 String categoryName,
@@ -24,6 +36,10 @@ public class CategoryEditView {
                 Consumer<Integer> onDelete
     ) {}
 
+    /**
+     * @param viewModel The data required by the view
+     * @return The root Node of the scene for showing the 'edit category' view
+     */
     public static Node createScene(ViewModel viewModel) {
 
         var grid = new GridPane();

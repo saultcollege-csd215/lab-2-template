@@ -13,6 +13,10 @@ import sales.feature.category.validation.CategoryData;
 import sales.feature.base.data.BaseRepository;
 import sales.feature.base.data.DataAccessException;
 
+/**
+ * An abstraction for accessing and manipulating Category data in the database.
+ * All database access code related to Categories should be contained in this class.
+ */
 public class CategoryRepository extends BaseRepository {
 
     private static final Logger logger = Logger.getLogger(CategoryRepository.class.getName());
@@ -21,6 +25,10 @@ public class CategoryRepository extends BaseRepository {
         super(connection);
     }
 
+    /**
+     * @return A list of all Categories in the database
+     * @throws DataAccessException  If an SQLException occurs
+     */
     public List<Category> all() throws DataAccessException {
 
         try {
@@ -50,9 +58,21 @@ public class CategoryRepository extends BaseRepository {
         }
     }
 
+    /**
+     * @return A list of the names of all categories in the database
+     * @throws DataAccessException  If an SQLException occurs
+     */
     public List<String> allCategoryNames() throws DataAccessException {
         return allCategoryNames(-1);
     }
+
+    /**
+     * Returns a list of the names of all categories in the database except the category with the given id.
+     * This is useful for validating that a category name is unique when updating an existing category.
+     * @param exceptThisCategoryId The id to exclude in the returned list
+     * @return The list of all category names minus the 'exceptThisCategoryId' category name
+     * @throws DataAccessException If an SQLException occurs
+     */
     public List<String> allCategoryNames(int exceptThisCategoryId) throws DataAccessException {
         try {
             var statement = connection.prepareStatement(
@@ -77,6 +97,11 @@ public class CategoryRepository extends BaseRepository {
         }
     }
 
+    /**
+     * @param categoryId The id of the category to look up
+     * @return The number of products associated with the given category id
+     * @throws DataAccessException  If an SQLException occurs
+     */
     public int countProductsInCategory(int categoryId) throws DataAccessException {
         try {
             var statement = connection.prepareStatement(
@@ -101,6 +126,12 @@ public class CategoryRepository extends BaseRepository {
         }
     }
 
+    /**
+     * Create a new category row for the given validated category data
+     * @param c The validated category data
+     * @return The created Category with its new id
+     * @throws DataAccessException  If an SQLException occurs
+     */
     public Category create(CategoryData.Validated c) throws DataAccessException {
         try{
             var statement = connection.prepareStatement(
@@ -124,6 +155,13 @@ public class CategoryRepository extends BaseRepository {
         }
     }
 
+    /**
+     * Updates a category with the given validated data
+     * @param categoryId The id of the category to update
+     * @param c The validated category data
+     * @return The updated Category data
+     * @throws DataAccessException  If an SQLException occurs
+     */
     public Category update(int categoryId, CategoryData.Validated c) throws DataAccessException {
         try {
             var statement = connection.prepareStatement(
@@ -148,6 +186,11 @@ public class CategoryRepository extends BaseRepository {
 
     }
 
+    /**
+     * Delete a category
+     * @param categoryId The id of the category to delete
+     * @throws DataAccessException  If an SQLException occurs
+     */
     public void delete(int categoryId) throws DataAccessException{
         try {
             var statement = connection.prepareStatement(

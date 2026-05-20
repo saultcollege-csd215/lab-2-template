@@ -12,13 +12,25 @@ import java.util.function.Consumer;
 import static sales.feature.base.ui.helpers.JavaFXUtils.createColumn;
 import static sales.feature.base.ui.helpers.JavaFXUtils.setOnDoubleClick;
 
+/**
+ * A 'namespace' class for types and functions related to displaying the list of categories in the UI.
+ */
 public class CategoriesView {
 
+    /**
+     * The view model containing the data needed by the view
+     * @param categories The set of categories to show
+     * @param onCategorySelected The callback for when the user double-clicks a specific category
+     */
     public record ViewModel(
             List<Category> categories,
             Consumer<Category> onCategorySelected
     ) {}
 
+    /**
+     * @param viewModel The data required by the view
+     * @return The root Node of the scene for showing the list of categories in the database
+     */
     public static Node createScene(ViewModel viewModel) {
         var observableProducts = FXCollections.observableList(viewModel.categories());
         TableView<Category> table = new TableView<>(observableProducts);
