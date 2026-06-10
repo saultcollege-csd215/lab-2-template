@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.StringConverter;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -74,9 +75,46 @@ public class JavaFXUtils {
         if (validationMessage != null && !validationMessage.isEmpty()) {
             errorLabel.setText(validationMessage);
         }
+
+        // Hooks for TestFX
+        field.setId(toCssIdentifier(labelText + " Field"));
+        errorLabel.setId(toCssIdentifier(labelText + " ValidationMessage"));
+
         grid.add(label, 0, rowIndex);
         grid.add(field, 1, rowIndex);
         grid.add(errorLabel, 2, rowIndex);
+    }
+
+    /**
+     * Converts the given text into a string that can be used as a valid CSS identifier (e.g. for a Node ID or CSS class name) by replacing spaces with hyphens and removing invalid characters.
+     * @param text The text to convert
+     * @return A CSS-friendly version of the input text
+     */
+    public static String toCssIdentifier(String text) {
+        if (text == null || text.isBlank()) {
+            return "";
+        }
+
+        String result = text
+                .trim()
+                // Insert a hyphen before capitals that follow a lowercase letter or digit
+                .replaceAll("([a-z0-9])([A-Z])", "$1-$2")
+                // Replace whitespace with hyphens
+                .replaceAll("\\s+", "-")
+                // Convert to lowercase
+                .toLowerCase(Locale.ROOT)
+                // Remove invalid characters
+                .replaceAll("[^a-z0-9_-]", "")
+                // Collapse multiple hyphens
+                .replaceAll("-{2,}", "-")
+                // Remove leading/trailing hyphens
+                .replaceAll("^-|-$", "");
+
+        if (!result.isEmpty() && Character.isDigit(result.charAt(0))) {
+            result = "_" + result;
+        }
+
+        return result;
     }
 
     /**

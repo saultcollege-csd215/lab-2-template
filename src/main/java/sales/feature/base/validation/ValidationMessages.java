@@ -53,4 +53,31 @@ public class ValidationMessages {
     public static ValidationMessages none() {
         return new ValidationMessages();
     }
+
+    public static ValidationMessages of(String k1, String m1) {
+        var messages = new ValidationMessages();
+        messages.add(k1, m1);
+        return messages;
+    }
+    public static ValidationMessages of(String k1, String m1, String k2, String m2) {
+        var messages = of(k1, m1);
+        messages.add(k2, m2);
+        return messages;
+    }
+    public static ValidationMessages of(String k1, String m1, String k2, String m2, String k3, String m3) {
+        var messages = of(k1, m1, k2, m2);
+        messages.add(k3, m3);
+        return messages;
+    }
+    public static ValidationMessages of(String k1, String m1, String k2, String m2, String k3, String m3, String k4, String m4) {
+        var messages = of(k1, m1, k2, m2, k3, m3);
+        messages.add(k4, m4);
+        return messages;
+    }
+    public static ValidationMessages of(String k1, String m1, String k2, String m2, String k3, String m3, String k4, String m4, String k5, String m5) {
+        var messages = of(k1, m1, k2, m2, k3, m3, k4, m4);
+        messages.add(k5, m5);
+        return messages;
+    }
+
 }

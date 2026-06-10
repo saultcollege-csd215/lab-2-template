@@ -80,6 +80,7 @@ public class ProductNewView {
         pane.setCenter(grid);
 
         var saveButton = new Button("Save");
+        saveButton.setId("save-button");
         saveButton.setOnAction(_ -> {
             var selectedCategory = categoryChoiceBox.getSelectionModel().getSelectedItem();
             viewModel.onSave().accept(new ProductData.Unvalidated(

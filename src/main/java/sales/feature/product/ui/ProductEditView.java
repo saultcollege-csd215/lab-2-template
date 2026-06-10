@@ -89,6 +89,7 @@ public class ProductEditView {
         pane.setCenter(grid);
 
         var saveButton = new Button("Update");
+        saveButton.setId("update-button");
         saveButton.setOnAction(_ -> {
             var selectedCategory = categoryChoiceBox.getSelectionModel().getSelectedItem();
             viewModel.onUpdate().accept(viewModel.productId(), new ProductData.Unvalidated(
@@ -101,6 +102,7 @@ public class ProductEditView {
         });
 
         var deleteButton = new Button("Delete");
+        deleteButton.setId("delete-button");
         deleteButton.setOnAction(_ -> viewModel.onDelete().accept(viewModel.productId()));
 
         var spacer = new Region();
