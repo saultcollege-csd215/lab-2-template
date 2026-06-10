@@ -4,13 +4,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import sales.feature.base.data.DataService;
-import sales.feature.category.validation.CategoryData;
-import sales.testsupport.TestDatabase;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class CategoryRepositoryIntegrationTest {
 
